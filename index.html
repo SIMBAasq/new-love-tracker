@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Tracker - Трекер отношений</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-top">
+                <h1><i class="fas fa-heart"></i> Love Tracker</h1>
+                <div class="settings-menu">
+                    <button id="themeToggle" class="btn-icon" title="Сменить тему">
+                        <i class="fas fa-palette"></i>
+                    </button>
+                    <button id="installBtn" class="btn-icon" title="Установить приложение" style="display: none;">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+            </div>
+            <p>Отслеживайте каждый счастливый момент ваших отношений</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Шаг 1: Ввод даты -->
+            <div class="step-section active" id="step1">
+                <div class="step-content">
+                    <h2><i class="fas fa-calendar-alt"></i> Когда вы начали встречаться?</h2>
+                    <div class="input-group">
+                        <input type="date" id="startDate" class="date-input">
+                        <button id="saveDate" class="btn-primary">
+                            <i class="fas fa-arrow-right"></i> Продолжить
+                        </button>
+                    </div>
+                    <div class="step-navigation">
+                        <span class="step-indicator active">1</span>
+                        <span class="step-indicator">2</span>
+                        <span class="step-indicator">3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Шаг 2: Ввод имен и фото -->
+            <div class="step-section" id="step2">
+                <div class="step-content">
+                    <h2><i class="fas fa-users"></i> Расскажите о вашей паре</h2>
+                    
+                    <div class="couple-inputs">
+                        <div class="partner-input">
+                            <label for="partner1">Ваше имя</label>
+                            <input type="text" id="partner1" placeholder="Введите ваше имя" class="name-input">
+                        </div>
+                        <div class="heart-divider">❤</div>
+                        <div class="partner-input">
+                            <label for="partner2">Имя партнера</label>
+                            <input type="text" id="partner2" placeholder="Введите имя партнера" class="name-input">
+                        </div>
+                    </div>
+                    
+                    <div class="photo-upload">
+                        <h3>Фото пары (опционально)</h3>
+                        <div class="photo-preview" id="photoPreview">
+                            <div class="photo-placeholder">
+                                <i class="fas fa-camera"></i>
+                                <span>Добавьте ваше фото</span>
+                            </div>
+                        </div>
+                        <input type="file" id="photoUpload" accept="image/*" style="display: none;">
+                        <button onclick="document.getElementById('photoUpload').click()" class="btn-secondary">
+                            <i class="fas fa-upload"></i> Загрузить фото
+                        </button>
+                    </div>
+                    
+                    <div class="step-actions">
+                        <button id="backToStep1" class="btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Назад
+                        </button>
+                        <button id="saveCoupleInfo" class="btn-primary">
+                            <i class="fas fa-check"></i> Начать отсчет!
+                        </button>
+                    </div>
+                    
+                    <div class="step-navigation">
+                        <span class="step-indicator">1</span>
+                        <span class="step-indicator active">2</span>
+                        <span class="step-indicator">3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Шаг 3: Основной экран -->
+            <div class="step-section" id="step3">
+                <div class="timer-section">
+                    <!-- Заголовок с кнопкой редактирования -->
+                    <div class="timer-header">
+                        <div class="couple-display" id="coupleDisplay">
+                            <div class="partner-name" id="displayPartner1">Имя 1</div>
+                            <div class="couple-photo" id="couplePhoto">
+                                <div class="photo-placeholder-small">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                            </div>
+                            <div class="partner-name" id="displayPartner2">Имя 2</div>
+                        </div>
+                        <button id="editCoupleBtn" class="btn-icon" title="Редактировать пару">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+
+                    <!-- Основной таймер -->
+                    <div class="timer-display">
+                        <div class="time-unit">
+                            <div class="time-value" id="years">0</div>
+                            <div class="time-label">лет</div>
+                        </div>
+                        <div class="time-unit">
+                            <div class="time-value" id="months">0</div>
+                            <div class="time-label">месяцев</div>
+                        </div>
+                        <div class="time-unit">
+                            <div class="time-value" id="days">0</div>
+                            <div class="time-label">дней</div>
+                        </div>
+                        <div class="time-unit">
+                            <div class="time-value" id="hours">0</div>
+                            <div class="time-label">часов</div>
+                        </div>
+                        <div class="time-unit">
+                            <div class="time-value" id="minutes">0</div>
+                            <div class="time-label">минут</div>
+                        </div>
+                        <div class="time-unit">
+                            <div class="time-value" id="seconds">0</div>
+                            <div class="time-label">секунд</div>
+                        </div>
+                    </div>
+
+                    <!-- Уровень отношений -->
+                    <div class="relationship-level">
+                        <h3>Уровень отношений</h3>
+                        <div class="level-display">
+                            <div class="level-icon" id="levelIcon">💕</div>
+                            <div class="level-info">
+                                <div class="level-name" id="levelName">Знакомство</div>
+                                <div class="level-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="levelProgress"></div>
+                                    </div>
+                                    <span class="progress-text" id="progressText">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="total-days">
+                        <h3>Всего вместе:</h3>
+                        <div class="total-days-value" id="totalDays">0 дней</div>
+                    </div>
+
+                    <div class="milestones">
+                        <h3>Ближайшие вехи:</h3>
+                        <div class="milestone-list" id="milestoneList"></div>
+                    </div>
+
+                    <!-- Кнопка сброса -->
+                    <div class="reset-section">
+                        <button id="resetDate" class="btn-secondary">
+                            <i class="fas fa-redo"></i> Начать заново
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Галерея моментов -->
+                <div class="gallery-section">
+                    <h2><i class="fas fa-images"></i> Галерея моментов</h2>
+                    <div class="gallery-controls">
+                        <button id="addMemoryBtn" class="btn-primary">
+                            <i class="fas fa-plus"></i> Добавить момент
+                        </button>
+                    </div>
+                    <div class="gallery-grid" id="galleryGrid">
+                        <!-- Моменты будут добавляться здесь -->
+                    </div>
+                </div>
+
+                <div class="step-navigation">
+                    <span class="step-indicator">1</span>
+                    <span class="step-indicator">2</span>
+                    <span class="step-indicator active">3</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Модальное окно редактирования пары -->
+        <div id="editCoupleModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2><i class="fas fa-edit"></i> Редактировать пару</h2>
+                
+                <div class="couple-inputs">
+                    <div class="partner-input">
+                        <label for="editPartner1">Ваше имя</label>
+                        <input type="text" id="editPartner1" placeholder="Введите ваше имя" class="name-input">
+                    </div>
+                    <div class="heart-divider">❤</div>
+                    <div class="partner-input">
+                        <label for="editPartner2">Имя партнера</label>
+                        <input type="text" id="editPartner2" placeholder="Введите имя партнера" class="name-input">
+                    </div>
+                </div>
+                
+                <div class="photo-upload">
+                    <h3>Фото пары</h3>
+                    <div class="photo-preview" id="editPhotoPreview">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-camera"></i>
+                            <span>Добавьте ваше фото</span>
+                        </div>
+                    </div>
+                    <input type="file" id="editPhotoUpload" accept="image/*" style="display: none;">
+                    <button onclick="document.getElementById('editPhotoUpload').click()" class="btn-secondary">
+                        <i class="fas fa-upload"></i> Загрузить фото
+                    </button>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" id="saveEditCouple" class="btn-primary">
+                        <i class="fas fa-save"></i> Сохранить изменения
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для добавления/редактирования момента -->
+        <div id="memoryModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle">Добавить особенный момент</h2>
+                <form id="memoryForm">
+                    <input type="hidden" id="memoryId">
+                    <div class="form-group">
+                        <label for="memoryTitle">Название *</label>
+                        <input type="text" id="memoryTitle" placeholder="Например: Первое свидание" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="memoryDate">Дата *</label>
+                        <input type="date" id="memoryDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="memoryDescription">Описание</label>
+                        <textarea id="memoryDescription" placeholder="Опишите этот особенный момент..." rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="memoryPhoto">Фото (опционально)</label>
+                        <div class="photo-upload-container">
+                            <input type="file" id="memoryPhoto" accept="image/*">
+                            <div class="photo-preview-small" id="memoryPhotoPreview">
+                                <div class="photo-placeholder">
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="deleteMemoryBtn" class="btn-danger" style="display: none;">
+                            <i class="fas fa-trash"></i> Удалить
+                        </button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Сохранить момент
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Модальное окно подтверждения удаления -->
+        <div id="confirmModal" class="modal">
+            <div class="modal-content confirm-modal">
+                <h3>Подтверждение удаления</h3>
+                <p>Вы уверены, что хотите удалить этот момент?</p>
+                <div class="confirm-actions">
+                    <button id="confirmCancel" class="btn-secondary">Отмена</button>
+                    <button id="confirmDelete" class="btn-danger">Удалить</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="love-quote">
+            <p id="quoteText">Любовь измеряется не временем, а моментами, которые делают время стоящим</p>
+        </div>
+
+        <footer class="footer">
+            <p>Над сайтом работал: Хайруллин Ильзат. ТГ: @XXSHWEPSXX</p>
+        </footer>
+    </div>
+
+    <div class="floating-hearts"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
